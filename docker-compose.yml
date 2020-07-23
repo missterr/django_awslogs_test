@@ -5,9 +5,8 @@ services:
     build: .
     container_name: awslogs
     command: >
-        bash -c "python manage.py makemigrations
+        bash -c "ls -la && python manage.py makemigrations
         && python manage.py migrate
-        && python manage.py load_rates
         && python manage.py runserver 0.0.0.0:8011"
     logging:
       driver: "awslogs"
@@ -16,6 +15,6 @@ services:
         awslogs-group: "test-aws-log-group"
         awslogs-stream: "test-aws-log-stream"
     volumes:
-      - ./django_awslogs_test:/django_awslogs_test
+      - .:/django_awslogs_test
     ports:
       - "8011:8011"
