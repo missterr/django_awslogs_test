@@ -129,7 +129,7 @@ LOGGING = {
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
         'json': {
-            '()': 'django_awslogs_test.JSONFormatter'
+            '()': 'django_awslogs_test.json_formatter.CustomisedJSONFormatter'
         }
     },
     'handlers': {

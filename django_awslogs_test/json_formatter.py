@@ -6,16 +6,14 @@ import ujson
 
 class CustomisedJSONFormatter(JSONFormatter):
     json_lib = ujson
+    fields = ('levelname', 'name', 'module', 'process', 'thread')
 
     def json_record(self, message: str, extra: dict, record: logging.LogRecord) -> dict:
         extra['message'] = message
+        extra = {field: getattr(record, field) for field in self.fields}
 
-        # Include builtins
-        extra['level'] = record.levelname
-        extra['name'] = record.name
-
-        if 'time' not in extra:
-            extra['time'] = timezone.now()
+        if 'asctime' not in extra:
+            extra['asctime'] = timezone.now()
 
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)
