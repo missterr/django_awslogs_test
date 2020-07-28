@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+APP_NAME = 'django_awslogs_test'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -125,26 +127,27 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'json': {
-            '()': 'django_awslogs_test.json_formatter.CustomisedJSONFormatter'
+            '()': 'django_awslogs_test.logging.CustomisedJSONFormatter'
         }
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'json'
+            'formatter': 'json',
+            'filters': ['app_filter']
         },
+    },
+    'filters': {
+        'app_filter': {
+            '()': 'django_awslogs_test.logging.CustomFilter',
+        }
     },
     'loggers': {
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': False
-        },
-        'django.server': {
+        'django': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False
