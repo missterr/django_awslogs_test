@@ -7,7 +7,7 @@ import ujson
 class CustomisedJSONFormatter(JSONFormatter):
     json_lib = ujson
     fields = ('levelname', 'name', 'module', 'processName', 'threadName', 'pathname')
-    unjsonable = ('request',)
+    unjsonable = ('request', )
 
     def json_record(self, message: str, extra: dict, record: logging.LogRecord) -> dict:
         extra['message'] = message
@@ -18,8 +18,7 @@ class CustomisedJSONFormatter(JSONFormatter):
         for field in self.unjsonable:
             extra.pop(field, None)
 
-        asctime = extra.get('asctime', timezone.now()).strftime('%Y-%m-%d %H:%M:%S')
-        extra['asctime'] = asctime
+        extra['server_time'] = timezone.now().strftime('%Y-%m-%d %H:%M:%S.%f')
 
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)
