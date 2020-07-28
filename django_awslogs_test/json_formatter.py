@@ -18,8 +18,8 @@ class CustomisedJSONFormatter(JSONFormatter):
         for field in self.unjsonable:
             extra.pop(field, None)
 
-        if 'asctime' not in extra:
-            extra['asctime'] = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
+        asctime = extra.get('asctime', timezone.now()).strftime('%Y-%m-%d %H:%M:%S')
+        extra['asctime'] = asctime
 
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)
