@@ -124,10 +124,6 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'custom': {
-            'format': '%(levelname)s %(asctime)s %(name)s %(module)s %(process)d %(thread)d %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-        },
         'json': {
             '()': 'django_awslogs_test.json_formatter.CustomisedJSONFormatter'
         }
@@ -141,7 +137,7 @@ LOGGING = {
     'loggers': {
         '': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': 'DEBUG',
         },
         'django.request': {
             'handlers': ['console'],
