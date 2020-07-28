@@ -14,4 +14,3 @@ def test_logging(request):
 
 def test_exception(request):
     raise ZeroDivisionError
-    return HttpResponse('Everything is ok')
