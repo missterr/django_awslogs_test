@@ -14,6 +14,7 @@ services:
         awslogs-region: "us-west-1"
         awslogs-group: "test-aws-log-group"
         awslogs-stream: "test-aws-log-stream"
+        awslogs-datetime-format: "%Y-%m-%d %H:%M:%S"
     volumes:
       - .:/django_awslogs_test
     ports:
