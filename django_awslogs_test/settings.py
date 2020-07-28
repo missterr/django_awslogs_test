@@ -127,12 +127,15 @@ LOGGING = {
         'custom': {
             'format': '%(levelname)s %(asctime)s %(name)s %(module)s %(process)d %(thread)d %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'json': {
+            '()': 'django_awslogs_test.JSONFormatter'
         }
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'custom'
+            'formatter': 'json'
         },
     },
     'loggers': {
